@@ -11,16 +11,16 @@ directory_dict = {
     'TRAIN_LOSS_DIR': "training_loss.png"
 }
 
-max_epochs = 20
+max_epochs = 5
 hyperparameters = {'lr': 1e-3, 'l1': 1e-3}
-train_loader, validation_loader = load_images(directory_dict['DATA_DIR'], train_split=0.8, batch_size=64)
+train_loader, validation_loader = load_images(directory_dict['DATA_DIR'], train_split=0.5, batch_size=256)
 sparse_ae = AutoEncoder()
 
 
 # Run example
 def run_model(model, train, validation, epochs, hyper_params, directories):
 
-    model_output, losses_vector = training(model, train, validation, epochs, hyper_params, directories, to_print=1)
+    model_output, losses_vector = training(model, train, validation, epochs, hyper_params, directories, to_print=2)
     visualise_reconstruction_loss(model_output, directories['RECON_DIR'], max_epochs)
     plot_training_loss(losses_vector[0], directories['TRAIN_LOSS_DIR'])
 

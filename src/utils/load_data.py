@@ -6,14 +6,13 @@ from torchvision.transforms import ToTensor, Compose, Resize
 np.random.seed(0)
 
 
-def load_images(data_path, train_split=0.3, rescaling=200, shuffle_dataset=True, batch_size=128, num_workers=4):
+def load_images(data_path, train_split=0.3, rescaling=200, shuffle_dataset=True, batch_size=128):
     """
     :param data_path:
     :param train_split:
     :param rescaling:
     :param shuffle_dataset:
     :param batch_size:
-    :param num_workers:
     :return:
     """
     dataset = thv.datasets.ImageFolder(
@@ -27,7 +26,7 @@ def load_images(data_path, train_split=0.3, rescaling=200, shuffle_dataset=True,
 
     if shuffle_dataset:
         np.random.shuffle(indices)
-    train_indices, val_indices = indices[:split], indices[split:]
+    train_indices, val_indices = indices[:split], indices[split:split+200]
 
     # Creating PT data samplers and loaders:
     train_sampler = SubsetRandomSampler(train_indices)
