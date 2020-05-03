@@ -35,7 +35,7 @@ def train_step(model, optimizer, loss_fn, out, images, reg_param):
     return [loss, bce_loss, sparsity_loss]
 
 
-def training(model, train_loader, validation_loader, num_epochs, hyperps, directories, to_print=1, save_model=False):
+def training(model, train_loader, validation_loader, num_epochs, hyperps, directories, to_print=1, save_model=True):
     """
     :param model: AutoEncoder class
     :param train_loader: Torch DataLoader object
@@ -56,6 +56,7 @@ def training(model, train_loader, validation_loader, num_epochs, hyperps, direct
     outputs = []
     train_losses = []
     val_losses = []
+    best_loss = float("inf")
 
     for epoch in range(num_epochs):
         for idx, data in enumerate(train_loader):
@@ -78,7 +79,11 @@ def training(model, train_loader, validation_loader, num_epochs, hyperps, direct
         val_losses.append(validation_loss)
         print('Epoch:{}, Loss:{:.4f}'.format(epoch + 1, validation_loss))
 
-        if save_model:
-            save_parameters(model, directories['MODEL_DIR'])
+        if validation_loss <= best_loss:
+            best_loss = validation_loss
+
+            if epoch == num_epochs-1:
+                if save_model:
+                    save_parameters(model, directories['MODEL_DIR'])
 
     return outputs, [train_losses, val_losses]

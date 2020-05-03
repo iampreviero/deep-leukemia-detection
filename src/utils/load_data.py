@@ -6,10 +6,10 @@ from torchvision.transforms import ToTensor, Compose, Resize
 np.random.seed(0)
 
 
-def load_images(data_path, validation_split=0.3, rescaling=200, shuffle_dataset=True, batch_size=128, num_workers=4):
+def load_images(data_path, train_split=0.3, rescaling=200, shuffle_dataset=True, batch_size=128, num_workers=4):
     """
     :param data_path:
-    :param validation_split:
+    :param train_split:
     :param rescaling:
     :param shuffle_dataset:
     :param batch_size:
@@ -23,7 +23,7 @@ def load_images(data_path, validation_split=0.3, rescaling=200, shuffle_dataset=
 
     dataset_size = len(dataset)
     indices = list(range(dataset_size))
-    split = int(np.floor(validation_split * dataset_size))
+    split = int(np.floor(train_split * dataset_size))
 
     if shuffle_dataset:
         np.random.shuffle(indices)
