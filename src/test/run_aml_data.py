@@ -5,22 +5,22 @@ from utils.visualise_outputs import visualise_reconstruction_loss, plot_training
 
 # Define parameters
 directory_dict = {
-    'DATA_DIR': '/Users/alessandropreviero/Downloads/a',
+    'DATA_DIR': '/Users/alessandropreviero/Downloads',
     'MODEL_DIR': '/Users/alessandropreviero/PycharmProjects/deep-leukemia-detection/src/saved/ae.pt',
     'RECON_DIR': "reconstructions.png",
     'TRAIN_LOSS_DIR': "training_loss.png"
 }
 
-max_epochs = 1
+max_epochs = 20
 hyperparameters = {'lr': 1e-3, 'l1': 1e-3}
-train_loader, validation_loader = load_images(directory_dict['DATA_DIR'], train_split=0.9, batch_size=64)
+train_loader, validation_loader = load_images(directory_dict['DATA_DIR'], train_split=0.8, batch_size=64)
 sparse_ae = AutoEncoder()
 
 
 # Run example
 def run_model(model, train, validation, epochs, hyper_params, directories):
 
-    model_output, losses_vector = training(model, train, validation, epochs, hyper_params, directories, to_print=2)
+    model_output, losses_vector = training(model, train, validation, epochs, hyper_params, directories, to_print=1)
     visualise_reconstruction_loss(model_output, directories['RECON_DIR'], max_epochs)
     plot_training_loss(losses_vector[0], directories['TRAIN_LOSS_DIR'])
 

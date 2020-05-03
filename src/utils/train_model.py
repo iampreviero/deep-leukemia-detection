@@ -69,7 +69,7 @@ def training(model, train_loader, validation_loader, num_epochs, hyperps, direct
                 print("Epoch: {}, iteration: {}, iter_loss: {:.3f}".format(epoch, idx, float(loss[0])))
 
         if to_print:
-            print('Epoch:{}, Loss:{:.4f}'.format(epoch + 1, float(loss[0])))
+            print('Epoch:{}, Train loss:{:.4f}'.format(epoch + 1, float(loss[0])))
         outputs.append((epoch, img, recon), )
 
         validation_loss = 0
@@ -77,7 +77,7 @@ def training(model, train_loader, validation_loader, num_epochs, hyperps, direct
             img, _ = data
             validation_loss += criterion(model(img), img)
         val_losses.append(validation_loss)
-        print('Epoch:{}, Loss:{:.4f}'.format(epoch + 1, validation_loss))
+        print('     Validation loss:{:.4f}'.format(validation_loss))
 
         if validation_loss <= best_loss:
             best_loss = validation_loss
