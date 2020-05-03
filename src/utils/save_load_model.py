@@ -1,5 +1,5 @@
 import torch as th
-from src.model.autoencoder import AutoEncoder
+from model.autoencoder import AutoEncoder
 
 
 def save_parameters(model, directory):

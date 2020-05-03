@@ -2,7 +2,7 @@ import torch as th
 import torch.nn as nn
 import torch.nn.functional as F
 import torch.optim as optim
-from src.utils.save_load_model import save_parameters
+from utils.save_load_model import save_parameters
 
 
 def l1_loss(model, images):
