@@ -10,6 +10,7 @@ directory_dict = {
     'RECON_DIR': "models/reconstructions.png",
     'TRAIN_LOSS_DIR': "models/training_loss.png"
 }
+
 max_epochs = 1
 hyperparameters = {'lr': 1e-3, 'l1': 1e-3}
 train_loader, validation_loader = load_images(directory_dict['DATA_DIR'])
